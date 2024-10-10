@@ -3,3 +3,13 @@ C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\obj\Debug\net8.0\GerenciamentoBi
 C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\obj\Debug\net8.0\GerenciamentoBiblioteca.AssemblyInfo.cs
 C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\obj\Debug\net8.0\GerenciamentoBiblioteca.csproj.CoreCompileInputs.cache
 C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\obj\Debug\net8.0\GerenciamentoBiblioteca.sourcelink.json
+C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\bin\Debug\net8.0\GerenciamentoBiblioteca.exe
+C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\bin\Debug\net8.0\GerenciamentoBiblioteca.deps.json
+C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\bin\Debug\net8.0\GerenciamentoBiblioteca.runtimeconfig.json
+C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\bin\Debug\net8.0\GerenciamentoBiblioteca.dll
+C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\bin\Debug\net8.0\GerenciamentoBiblioteca.pdb
+C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\obj\Debug\net8.0\GerenciamentoBiblioteca.dll
+C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\obj\Debug\net8.0\refint\GerenciamentoBiblioteca.dll
+C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\obj\Debug\net8.0\GerenciamentoBiblioteca.pdb
+C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\obj\Debug\net8.0\GerenciamentoBiblioteca.genruntimeconfig.cache
+C:\Users\Alunos\Desktop\GerenciamentoBiblioteca\obj\Debug\net8.0\ref\GerenciamentoBiblioteca.dll
