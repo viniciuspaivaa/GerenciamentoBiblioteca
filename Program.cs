@@ -7,18 +7,22 @@ class Usuario
     public string Nome {get; set;}
     public string Senha {get; set;}
     public List<string> LivrosEmprestados {get; set;}
-    private static List<Usuario> usuarios;
+    public static List<Usuario> usuarios;
 
     public Usuario()
     {
         usuarios = new List<Usuario>();
     }    
 
-    public Usuario(string nome, string senha, string livroEmprestado)
+    public Usuario(string nome, string senha)
     {
         Nome = nome;
         Senha = senha;
-        LivrosEmprestados.Add(livroEmprestado);
+    }
+
+    public void AdicionarUsuario(string nome, string senha)
+    {
+        usuarios.Add(new Usuario(nome, senha));
     }
 
     public static List<Usuario> ProcurarUsuarios()
@@ -115,6 +119,7 @@ class Program
         Console.Clear();
 
         Livro livros = new Livro();
+        Usuario usuarios = new Usuario();
         int opcao;
         bool administrador = true;
         string permissao = administrador ? "administrador" : "usuario";
@@ -156,7 +161,13 @@ class Program
                     //LivrosEmprestados();
                     break;
                 case 5:
-                    //CadastrarUsuario();
+                    Console.Write("Digite o nome do novo usuário: ");
+                    string usuario = Console.ReadLine().ToLower();
+
+                    Console.Write("Digite a senha: ");
+                    string senha = Console.ReadLine();
+
+                    usuarios.AdicionarUsuario(usuario, senha);
                     break;
                 case 6:
                     if(!administrador)
