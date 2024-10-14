@@ -151,15 +151,31 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
+
+class Usuario
+{
+    public string Nome {get; set;}
+    public string Autor {get; set;}
+    public List<string> LivrosEmprestados {get; set;}
+
+}
+
+
+class Administrador
+{
+    public string NomeAdministrador {get; set;}
+    public string SenhaAdministrador {get; set;}
+}
+
+
 class Livro
 {
-    List<Livro> livros;
-
-
     public string Titulo {get; set;}
     public string Autor {get; set;}
     public string Genero {get; set;}
     public int Quantidade {get; set;}
+    List<Livro> livros;
+    Livro livroExistente;
 
 
     public Livro()
@@ -177,9 +193,37 @@ class Livro
     }
 
 
+    public void ExibirLivros()
+    {
+        foreach(var livro in livros)
+        {
+            Console.WriteLine($"Título: {livro.Titulo}\nAutor: {livro.Autor}\nGênero: {livro.Genero}\nQuantidade disponível: {livro.Quantidade}\n");
+        }
+    }
+
+
+    public void EmprestarLivro(string titulo)
+    {
+        livroExistente = livros.Find(l => l.Titulo == titulo);
+
+        if(livroExistente != null && livroExistente.Quantidade == 1)
+        {
+
+        }
+        else if(livroExistente != null && livroExistente.Quantidade > 1)
+        {
+
+        }
+        else
+        {
+            Console.WriteLine("Você não possui este livro para emprestar!\n");
+        }
+    }
+
+
     public void AdicionarLivro(string titulo, string autor, string genero, int quantidade)
     {
-        Livro livroExistente = livros.Find(l => l.Titulo == titulo);
+        livroExistente = livros.Find(l => l.Titulo == titulo);
 
         if(livroExistente != null)
         {
@@ -192,30 +236,6 @@ class Livro
             Console.WriteLine("Livro adicionado com sucesso!\n");
         }
     }
-
-
-    public void ExibirLivros()
-    {
-        foreach(var livro in livros)
-        {
-            Console.WriteLine($"Título: {livro.Titulo}\nAutor: {livro.Autor}\nGênero: {livro.Genero}\nQuantidade disponível: {livro.Quantidade}\n");
-        }
-    }
-}
-
-
-class Usuario
-{
-    public string Nome {get; set;}
-    public string Autor {get; set;}
-    public List<string> LivrosEmprestados {get; set;} = new List<string>();
-}
-
-
-class Administrador
-{
-    public string NomeAdministrador {get; set;}
-    public string SenhaAdministrador {get; set;}
 }
 
 
@@ -226,7 +246,6 @@ class Program
         Console.Clear();
 
         Livro livros = new Livro();
-
         int opcao;
         bool administrador = true;
         string permissao = administrador ? "administrador" : "usuario";
@@ -234,17 +253,38 @@ class Program
         do
         {
             Console.WriteLine($"Bem-vindo {permissao}\n");
-            Console.WriteLine("1. Adicionar livro\n2. Exibir livros\n3. Emprestar livro\n4. Devolver livro\n0. Sair");
-            Console.Write("\nDigite o que deseja: ");
+            Console.Write("1. Exibir livros\n2. Emprestar livro\n3. Devolver livro\n4. Livros emprestados\n5. Cadastrar usuario\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("6. Cadastrar administrador\n7. Adicionar livro\n");
+            Console.ResetColor();
+            Console.Write("0.Sair\n\nDigite o que deseja: ");
 
-            while(!int.TryParse(Console.ReadLine(), out opcao) || opcao < 0 || opcao > 4)
+            while(!int.TryParse(Console.ReadLine(), out opcao) || opcao < 0 || opcao > 7)
             {
-                Console.Write("\nNúmero inválido! Tente novamente: ");
+                Console.Write("Número inválido! Tente novamente: ");
             }
 
             switch(opcao)
             {
                 case 1:
+                    livros.ExibirLivros();
+                    break;
+                case 2:
+                    //EmprestarLivro();
+                    break;
+                case 3:
+                    //DevolverLivro();
+                    break;
+                case 4:
+                    //LivrosEmprestados();
+                    break;
+                case 5:
+                    //CadastrarUsuario();
+                    break;
+                case 6:
+                    //CadastrarAdm();
+                    break;
+                case 7:
                     if(!administrador)
                     {
                         Console.WriteLine("\nVocê não possui acesso como administrador!\n");
@@ -268,15 +308,6 @@ class Program
                         
                         livros.AdicionarLivro(t, a, g, q);
                     }
-                    break;
-                case 2:
-                    livros.ExibirLivros();
-                    break;
-                case 3:
-                    //EmprestarLivro();
-                    break;
-                case 4:
-                    //DevolverLivro();
                     break;
                 case 0:
                     Console.Write("Saindo...");
