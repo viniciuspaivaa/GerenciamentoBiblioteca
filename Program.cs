@@ -153,12 +153,20 @@ using System.Threading;
 
 class Livro
 {
-    public List<Livro> livros = new List<Livro>();
+    List<Livro> livros;
+
 
     public string Titulo {get; set;}
     public string Autor {get; set;}
     public string Genero {get; set;}
     public int Quantidade {get; set;}
+
+
+    public Livro()
+    {
+        livros = new List<Livro>();
+    }
+
 
     public Livro(string titulo, string autor, string genero, int quantidade)
     {
@@ -168,19 +176,29 @@ class Livro
         Quantidade = quantidade;
     }
 
+
     public void AdicionarLivro(string titulo, string autor, string genero, int quantidade)
     {
         Livro livroExistente = livros.Find(l => l.Titulo == titulo);
 
         if(livroExistente != null)
         {
-            Console.Write("Você já possui este livro, adicionando a nova quantidade.");
+            Console.WriteLine("Você já possui este livro, adicionando a nova quantidade.\n");
             livroExistente.Quantidade += quantidade;
         }
         else
         {
             livros.Add(new Livro(titulo, autor, genero, quantidade));
-            Console.Write("Livro adicionado com sucesso!");
+            Console.WriteLine("Livro adicionado com sucesso!\n");
+        }
+    }
+
+
+    public void ExibirLivros()
+    {
+        foreach(var livro in livros)
+        {
+            Console.WriteLine($"Título: {livro.Titulo}\nAutor: {livro.Autor}\nGênero: {livro.Genero}\nQuantidade disponível: {livro.Quantidade}\n");
         }
     }
 }
@@ -205,19 +223,23 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.Clear();
+
+        Livro livros = new Livro();
+
         int opcao;
         bool administrador = true;
         string permissao = administrador ? "administrador" : "usuario";
 
         do
         {
-            Console.Write($"Bem-vindo {permissao}");
-            Console.Write("1. Adicionar livro\n2. Exibir livros\n3. Emprestar livro\n4. Devolver livro\n0. Sair");
-            Console.Write("Digite o que deseja: ");
+            Console.WriteLine($"Bem-vindo {permissao}\n");
+            Console.WriteLine("1. Adicionar livro\n2. Exibir livros\n3. Emprestar livro\n4. Devolver livro\n0. Sair");
+            Console.Write("\nDigite o que deseja: ");
 
             while(!int.TryParse(Console.ReadLine(), out opcao) || opcao < 0 || opcao > 4)
             {
-                Console.Write("Número inválido! Tente novamente: ");
+                Console.Write("\nNúmero inválido! Tente novamente: ");
             }
 
             switch(opcao)
@@ -225,7 +247,7 @@ class Program
                 case 1:
                     if(!administrador)
                     {
-                        Console.Write("Você não possui acesso como administrador!");
+                        Console.WriteLine("\nVocê não possui acesso como administrador!\n");
                     }
                     else
                     {
@@ -248,7 +270,7 @@ class Program
                     }
                     break;
                 case 2:
-                    //ExibirLivros();
+                    livros.ExibirLivros();
                     break;
                 case 3:
                     //EmprestarLivro();
