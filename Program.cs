@@ -22,7 +22,19 @@ class Usuario
 
     public void AdicionarUsuario(string nome, string senha)
     {
+        usuarios = new List<Usuario>();
         usuarios.Add(new Usuario(nome, senha));
+        Console.Clear();
+        Console.WriteLine("Usuário cadastrado com sucesso!\n");
+    }
+
+    public void ExibirUsuarios()
+    {
+        Console.Clear();
+        foreach(var usuario in usuarios)
+        {
+            Console.WriteLine($"Nome: {usuario.Nome}");
+        }
     }
 
     public static List<Usuario> ProcurarUsuarios()
@@ -55,6 +67,7 @@ class Livro
 
     public void ExibirLivros()
     {
+        Console.Clear();
         foreach(var livro in livros)
         {
             Console.WriteLine($"Título: {livro.Titulo}\nAutor: {livro.Autor}\nGênero: {livro.Genero}\nQuantidade disponível: {livro.Quantidade}\n");
@@ -70,18 +83,21 @@ class Livro
         {
             if(livroExistente.Quantidade == 0)
             {
+                Console.Clear();
                 Console.WriteLine("Todas cópias já emprestadas!\n");
                 return;
             }
 
             if(usuarioExistente == null)
             {
+                Console.Clear();
                 Console.WriteLine("Usuário inexistente!");
                 return;
             }
 
             if(usuarioExistente.LivrosEmprestados.Count >= 3)
             {
+                Console.Clear();
                 Console.Write("Usuário já atingiu o limite de 3 livros emprestados!");
                 return;
             }
@@ -91,6 +107,7 @@ class Livro
         }
         else
         {
+            Console.Clear();
             Console.WriteLine("Você não possui este livro para emprestar!\n");
         }
     }
@@ -101,12 +118,14 @@ class Livro
 
         if(livroExistente != null)
         {
+            Console.Clear();
             Console.WriteLine("Você já possui este livro, adicionando a nova quantidade.\n");
             livroExistente.Quantidade += quantidade;
         }
         else
         {
             livros.Add(new Livro(titulo, autor, genero, quantidade));
+            Console.Clear();
             Console.WriteLine("Livro adicionado com sucesso!\n");
         }
     }
@@ -127,15 +146,15 @@ class Program
         do
         {
             Console.WriteLine($"Bem-vindo {permissao}\n");
-            Console.Write("1. Exibir livros\n2. Emprestar livro\n3. Devolver livro\n4. Livros emprestados\n5. Cadastrar usuario\n");
+            Console.Write("1. Exibir livros\n2. Emprestar livro\n3. Devolver livro\n4. Livros emprestados\n5. Cadastrar usuario\n6. Usuários cadastrados\n");
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("6. Adicionar livro\n");
+            Console.Write("7. Adicionar livro\n");
             Console.ResetColor();
 
             Console.Write("0.Sair\n\nDigite o que deseja: ");
 
-            while(!int.TryParse(Console.ReadLine(), out opcao) || opcao < 0 || opcao > 6)
+            while(!int.TryParse(Console.ReadLine(), out opcao) || opcao < 0 || opcao > 7)
             {
                 Console.Write("Número inválido! Tente novamente: ");
             }
@@ -170,8 +189,12 @@ class Program
                     usuarios.AdicionarUsuario(usuario, senha);
                     break;
                 case 6:
+                    usuarios.ExibirUsuarios();
+                    break;
+                case 7:
                     if(!administrador)
                     {
+                        Console.Clear();
                         Console.WriteLine("\nVocê não possui acesso como administrador!\n");
                     }
                     else
