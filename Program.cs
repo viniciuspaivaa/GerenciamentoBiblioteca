@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
 class Usuario
 {
     public string Nome {get; set;}
     public string Senha {get; set;}
-    public List<string> LivrosEmprestados {get; set;}
-    public static List<Usuario> usuarios;
+    public List<string> LivrosEmprestados {get; set;} = new List<string>();
+    public static List<Usuario> usuarios = new List<Usuario>();
 
     public Usuario()
     {
@@ -33,7 +34,12 @@ class Usuario
         Console.Clear();
         foreach(var usuario in usuarios)
         {
-            Console.WriteLine($"Nome: {usuario.Nome}");
+            Console.WriteLine($"Nome: {usuario.Nome}\n");
+            foreach(string emprestados in LivrosEmprestados)
+            {
+                Console.WriteLine($"Emprestados: {emprestados}");
+            }
+            Console.Write("\n");
         }
     }
 
@@ -78,9 +84,17 @@ class Livro
     {
         livroExistente = livros.Find(l => l.Titulo == titulo);
         Usuario usuarioExistente = Usuario.ProcurarUsuarios().Find(u => u.Nome == usuario);
+        Console.Write(usuarioExistente);
 
         if(livroExistente != null)
         {
+            if(usuarioExistente.LivrosEmprestados.Count >= 3)
+            {
+                Console.Clear();
+                Console.Write("Usuário já atingiu o limite de 3 livros emprestados!");
+                return;
+            }
+
             if(livroExistente.Quantidade == 0)
             {
                 Console.Clear();
@@ -92,13 +106,6 @@ class Livro
             {
                 Console.Clear();
                 Console.WriteLine("Usuário inexistente!");
-                return;
-            }
-
-            if(usuarioExistente.LivrosEmprestados.Count >= 3)
-            {
-                Console.Clear();
-                Console.Write("Usuário já atingiu o limite de 3 livros emprestados!");
                 return;
             }
 
